@@ -10,6 +10,7 @@ DEFAULT_PASSWORD = 123456
     show_spinner("Criando BD") {%x(rails db:create)}
     show_spinner("Migrando BD") {%x(rails db:migrate)}
     show_spinner("Cadastrado Default Admin") {%x(rails dev:add_default_admin)}
+    show_spinner("Cadastrado novos administradores") {%x(rails dev:add_extra_admin)}
     show_spinner("Cadastrado Default User") {%x(rails dev:add_default_user)}
     #%x(rails dev:add_mining_types)
   else
@@ -19,6 +20,17 @@ DEFAULT_PASSWORD = 123456
 
   desc "Adiciona o admin padrão"
   task add_default_admin: :environment do
+    10.times do
+      Admin.create!(
+        email: Faker::Internet.email,
+        password: DEFAULT_PASSWORD,
+        password_confirmation: DEFAULT_PASSWORD
+      )
+    end
+  end
+
+  desc "Adiciona admin extra"
+  task add_extra_admin: :environment do
       Admin.create!(
         email: 'admin@admin.com',
         password: DEFAULT_PASSWORD,

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   namespace :site do
     get 'welcome/index'
   end
@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     get 'welcome/index'
   end
   namespace :admins_backoffice do
-    get 'welcome/index'
+    get 'welcome/index' #Dashboard
+    resources :admins, except: [:delete] #resources cria as rotas padrões index, new, edit, create...(adm)
   end
 
   devise_for :admins
