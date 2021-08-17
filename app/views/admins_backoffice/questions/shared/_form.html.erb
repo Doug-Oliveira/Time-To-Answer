@@ -1,0 +1,43 @@
+<br>
+<h1><%= "#{action_message} Questões"%></h1>
+<hr/>
+<br>
+
+<% if @question.errors.any? %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <ul style="margin-bottom: 0rem !important;">
+      <%@question.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="card">
+  <div class="card-header">
+  <%= "#{action_message} Perguntas" %>
+  </div> 
+  <div class="card-body">
+  <%# Por padrão as informações do forms são enviadas via JS, 'local: true' define para que seja enviado via HTML %>
+    <%= form_with model: [:admins_backoffice, @question], local: true do |form|%>
+      <div class="form-group">
+        <%= form.label :description %>
+        <%= form.text_area :description, class: "form-control", placeholder:"Descrição da pergunta", rows: 5 %>
+      </div>
+      <div class="form-group">
+        <%= form.label :subject_id %>
+        <%# https://apidock.com/rails/v4.2.7/ActionView/Helpers/FormOptionsHelper/collection_select <= Documatation %>
+        <%= form.collection_select(:subject_id, @subjects, :id, :description, {}, {class:"form-control"}) %>
+      </div>
+      <button type="submit" class="btn btn-warning ">Salvar</button>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,38 @@
+<br>
+<h1><%= "#{action_message} Administrador"%></h1>
+<hr/>
+<br>
+
+<% if @subject.errors.any? %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <ul style="margin-bottom: 0rem !important;">
+      <%@subject.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="card">
+  <div class="card-header">
+  <%= "#{action_message} Assunto" %>
+  </div> 
+  <div class="card-body">
+  <%# Por padrão as informações do forms são enviadas via JS, 'local: true' define para que seja enviado via HTML %>
+    <%= form_with model: [:admins_backoffice, @subject], local: true do |form|%>
+      <div class="form-group">
+        <%= form.label :description %>
+        <%= form.text_field :description, class: "form-control", placeholder:"Descrição da Área" %>
+      </div>
+      <button type="submit" class="btn btn-warning ">Salvar</button>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+

@@ -14,7 +14,7 @@
       </th>
     </tr>
   </thead>
-  <tbody>
+  <tbody> 
   <% @admins.each do |admin| %>
     <tr>
       <th scope="row"><%=admin.id%></th>
@@ -24,8 +24,15 @@
         Editar
       <% end %>
       </td>
-      <td><button type="button" class="btn btn-danger">Apagar</button></td>
+      <td>
+      <%= link_to admins_backoffice_admin_path(admin.id), method: :delete, class:"btn btn-danger", data: {confirm: "Deseja realmente excluir?"} do %>
+        Excluir
+      <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>
 </table>
+<div class="d-flex justify-content-center mt-5">
+  <%= paginate @admins %>
+</div>

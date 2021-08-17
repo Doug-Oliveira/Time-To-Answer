@@ -1,6 +1,8 @@
 namespace :dev do
 
 DEFAULT_PASSWORD = 123456
+DEFAULT_FILES_PATH = File.join(Rails.root, 'lib', 'tmp')
+
 
   desc "Configura o ambiente de Dev"
   task setup: :environment do
@@ -12,6 +14,9 @@ DEFAULT_PASSWORD = 123456
     show_spinner("Cadastrado Default Admin") {%x(rails dev:add_default_admin)}
     show_spinner("Cadastrado novos administradores") {%x(rails dev:add_extra_admin)}
     show_spinner("Cadastrado Default User") {%x(rails dev:add_default_user)}
+    show_spinner("Cadastrado Assuntos padrões") {%x(rails dev:add_subjects)}
+    show_spinner("Cadastrado questões e respostas") {%x(rails dev:add_answer_and_questions)}
+
     #%x(rails dev:add_mining_types)
   else
   puts "!--Você não esta em Ambiente de Desenvolvimento--!"
@@ -26,6 +31,28 @@ DEFAULT_PASSWORD = 123456
         password: DEFAULT_PASSWORD,
         password_confirmation: DEFAULT_PASSWORD
       )
+    end
+  end
+
+  desc "Cadastrado Assuntos padrões"
+  task add_subjects: :environment do
+    file_name = 'subjects.txt'
+    file_path = File.join(DEFAULT_FILES_PATH, file_name)
+    #o 'r' vai abrir o arquivo como somente leitura (read)
+    File.open(file_path, 'r').each do |line|
+      Subject.create(description: line.strip)
+    end
+  end
+
+  desc "Cadastrado Perguntas e repostas"
+  task add_answer_and_questions: :environment do
+    Subject.all.each do |subject|
+      rand(5..10).times do |i|
+        Question.create!(
+          description: "#{Faker::Lorem.paragraph} #{Faker::Lorem.question}",
+          subject_id: subject.id
+        )
+      end
     end
   end
 
