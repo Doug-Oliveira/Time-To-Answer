@@ -1,13 +1,82 @@
-<h1>Site::Welcome#index</h1>
-<p>Find me in app/views/site/welcome/index.html.erb</p>
-<% if user_signed_in? %>
-    <p>Usuario está logado / <%= current_user.email %></p>
-<% else %>
-    <p>Usuario não está logado</p>
-<%end%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<% if admin_signed_in? %>
-    <p>Admin está logado<p>
-<% else %>
-<p>Admin não está logado</p>
-<% end %>
+  <title>Time to answer</title>
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+<header class="navigation">
+	<nav class="navbar navbar-expand-lg  py-4" id="navbar">
+		<div class="container">
+		  <a class="navbar-brand">
+		  	Time to<span> Answer.</span>
+		  </a>
+		  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="fa fa-bars"></span>
+		  </button>
+		  <div class="collapse navbar-collapse text-center" id="navbarsExample09">
+			<ul class="navbar-nav ml-auto">
+			<% unless user_signed_in? %>
+				<li class="nav-item active">
+					<%= link_to 'Entrar', new_user_session_path , class:"nav-link"%>
+			  </li>
+			  <li class="nav-item">
+					<%= link_to 'Cadastrar-se', new_user_registration_path, class: "nav-link"%>
+				</li>
+			<% else %>
+			   <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= current_user.email %></a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown05">
+						<%= link_to users_backoffice_welcome_index_path do %>
+							<i class="dropdown-item">Perfil</i>
+						<% end %>
+						<%= link_to destroy_user_session_path, method: :delete do  %>
+							<i class="dropdown-item">Sair</i>
+						<% end %>
+					</ul>
+			  </li>
+				<% end %>
+			</ul>
+		  </div>
+		</div>
+	</nav>
+</header>
+<div class="main-wrapper ">
+<section class="slider">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9 col-md-10">
+				<div class="block">
+					<span class="d-block mb-3 text-white text-capitalize">Aplicativo de Perguntas e respostas</span>
+					<h1 class="animated fadeInUp mb-5">Our work is <br>presentation of our <br>capabilities.</h1>
+					<a href="#" target="_blank" class="btn btn-main animated fadeInUp btn-round-full" >Get started<i class="btn-icon fa fa-angle-right ml-2"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+    <!-- Main jQuery -->
+    <script src="plugins/jquery/jquery.js"></script>
+    <script src="js/contact.js"></script>
+    <!-- Bootstrap 4.3.1 -->
+    <script src="plugins/bootstrap/js/popper.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+   <!--  Magnific Popup-->
+    <script src="plugins/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <!-- Slick Slider -->
+    <script src="plugins/slick-carousel/slick/slick.min.js"></script>
+    <!-- Counterup -->
+    <script src="plugins/counterup/jquery.waypoints.min.js"></script>
+    <script src="plugins/counterup/jquery.counterup.min.js"></script>  
+    
+    <script src="js/script.js"></script>
+
+</body>
+</html>
+   

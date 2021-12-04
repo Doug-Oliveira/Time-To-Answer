@@ -1,26 +1,43 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<main>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+          <div class="card-header"><h3 class="text-center font-weight-light my-4">Time To Answer</h3></div>
+          <div class="card-body">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <% flash.each do |key, value| %>
+                <div class="flash text-danger <%= key %>"><%= value %></div>
+              <% end %>
+              <div class="form-group">
+                <%= f.email_field :email, autofocus: true, placeholder:"E-mail", class:"form-control py-4", id:"inputEmailAddress"%>
+              </div>
+              <div class="form-group">
+                <%= f.password_field :password, placeholder: "Senha", class:"form-control py-4", id:"inputPassword" %>
+              </div>
+              <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
+                      <label class="custom-control-label" for="rememberPasswordCheck">Remember password</label>
+                  </div>
+              </div>
+              <% if devise_mapping.rememberable? %> 
+                <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                    <%= f.check_box :remember_me, class:"custom-control-input", id:"rememberPasswordCheck"%>
+                  </div>
+                </div>
+              <% end %>
+              <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                <%= f.submit "Log in", class:"btn btn-warning" %>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-footer text-center">
+              <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</main>

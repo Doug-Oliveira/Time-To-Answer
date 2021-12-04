@@ -8,12 +8,15 @@ Rails.application.routes.draw do
   end
   namespace :admins_backoffice do
     get 'welcome/index' #Dashboard
-    resources :admins#resources cria as rotas padrões index, new, edit, create...(adm)
+    resources :admins
     resources :subjects
     resources :questions
   end
 
-  devise_for :admins
+  devise_for :admins, controllers: {
+    confirmations: 'confirmations'
+  }
+  
   devise_for :users
   
   get 'inicio', to: 'site/welcome#index'

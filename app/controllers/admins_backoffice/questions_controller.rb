@@ -48,7 +48,8 @@ class AdminsBackoffice::QuestionsController < AdminsBackofficeController
   private
   def params_question
     #segurança permite que as informações abaixo sejam recebidas pelo controller
-    params_question = params.require(:question).permit(:description, :subject_id)
+    params.require(:question).permit(:description, :subject_id, 
+      answers_attributes: [:id, :description, :correct, :_destroy])   
   end
 
   def set_question
