@@ -34,13 +34,13 @@ gem 'awesome_print'
 gem 'mailcatcher'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem 'jquery-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-
+gem 'bootstrap', '~> 4.6.0'
 gem 'devise'
 
 gem 'rails-i18n', '~> 5.1'
