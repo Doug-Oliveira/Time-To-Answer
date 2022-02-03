@@ -58,15 +58,23 @@
 				</div>
 			</div>
 		</div>
+		<% @questions.each do |question| %>
 		<div class="card">
-  <h5 class="card-header">Featured</h5>
+  <h5 class="card-header"><%= question.description %></h5>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+	<ul>
+	<% question.answers.each do |answer|%>
+    <li><%= answer.description %></li>
+  <% end %>
+	</ul>
 	</div>
+</div>
+<br>
+<% end %>
+	</div>
+
+	
+	
 	
 </section>
     <!-- Main jQuery -->
