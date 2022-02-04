@@ -1,0 +1,13 @@
+<% @questions.each do |question| %>
+  <div class="card">
+    <h5 class="card-header"><%= question.description %></h5>
+    <div class="card-body">
+      <ul>
+        <% question.answers.each do |answer|%>
+          <li><%= answer.description %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <br>
+<% end %>
