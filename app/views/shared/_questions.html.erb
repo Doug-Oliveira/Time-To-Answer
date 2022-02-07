@@ -1,15 +1,17 @@
 <% @questions.each do |question| %>
-  <div class="card">
-    <h5 class="card-header"><%= question.description %></h5>
-    <div class="card-body">
-      <ul>
-        <% question.answers.each do |answer|%>
-          <li><%= answer.description %></li>
-        <% end %>
-      </ul>
+  <% form_with url: site_answer_path, local: true do |form|%>
+    <div class="card">
+      <h5 class="card-header"><%= question.description %></h5>
+      <div class="card-body">
+        <ul>
+          <% question.answers.each do |answer|%>
+            <li><%= answer.description %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
-  <br>
+    <br>
+  <% end %>
 <% end %>
 <div class="d-flex justify-content-center mt-5">
   <%= paginate @questions %>
