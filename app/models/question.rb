@@ -6,13 +6,14 @@ class Question < ApplicationRecord
   
   #paginates_per 8
   
-  def self.list_questions_params(page_params)
+  #scope são usadas quando é necessario fazer alguma persquisa no model
+  scope :list_questions_params, ->(page_params){
     Question.includes(:answers)
             .where('lower(description) LIKE ?', "%#{page_params.downcase}%")
-  end
+  }
   
-  def self.list_questions
+  scope :list_questions, ->{
     Question.includes(:answers)
             .order('created_at desc')
-  end
+  }
 end
