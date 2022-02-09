@@ -1,13 +1,17 @@
 <% @questions.each do |question| %>
-  <% form_with url: site_answer_path, local: true do |form|%>
+  <%= form_with url: site_answer_path do |form|%>
     <div class="card">
       <h5 class="card-header"><%= question.description %></h5>
       <div class="card-body">
-        <ul>
-          <% question.answers.each do |answer|%>
-            <li><%= answer.description %></li>
-          <% end %>
-        </ul>
+        <% question.answers.each do |answer|%>
+          <div class="form-check">
+            <label class="form-check-label">
+              <%= radio_button_tag 'answer_id', answer.id %><%= answer.description %>
+            </label>
+          </div>
+        <% end %>
+        <br>
+        <%= form.submit 'Responder', class: 'btn btn-primary' %>
       </div>
     </div>
     <br>
