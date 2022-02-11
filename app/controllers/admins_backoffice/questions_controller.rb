@@ -46,6 +46,7 @@ class AdminsBackoffice::QuestionsController < AdminsBackofficeController
   end
 
   private
+  
   def params_question
     #segurança permite que as informações abaixo sejam recebidas pelo controller
     params.require(:question).permit(:description, :subject_id, 

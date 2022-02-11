@@ -78,6 +78,7 @@ DEFAULT_FILES_PATH = File.join(Rails.root, 'lib', 'tmp')
   end
 
   private
+  
   def show_spinner(msg_start, msg_end = "Concluido com sucesso!!")
     spinner = TTY::Spinner.new("[:spinner] #{msg_start} ...")
     spinner.auto_spin

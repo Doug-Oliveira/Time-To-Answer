@@ -1,1 +1,11 @@
-alert('<%= @answer.correct %>');
+var element = document.getElementById("submit_answer_<%= @answer.question_id %>");
+
+element.classList.remove('btn-default');
+element.classList.remove('btn-danger');
+element.classList.remove('btn-success');
+
+if (<%= @answer.correct %>) {
+  element.classList.add('btn-success');
+} else {
+  element.classList.add('btn-danger');
+}
