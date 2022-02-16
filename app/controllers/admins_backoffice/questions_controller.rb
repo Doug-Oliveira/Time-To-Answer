@@ -8,8 +8,8 @@ class AdminsBackoffice::QuestionsController < AdminsBackofficeController
     #includes abaixo traz junto com a tabela questions, o assunto, assim possibilitando que na view não seja necessario
     #fazer uma nova query evitando o problema de n+1
     @questions = Question.includes(:subject).all
-                          .order(:description)
-                          .page(params[:page])
+                         .order(:description)
+                         .page(params[:page])
   end
 
   #rails consegue identificar que a rota para um Hash que está em branco é new
@@ -46,7 +46,7 @@ class AdminsBackoffice::QuestionsController < AdminsBackofficeController
   end
 
   private
-  
+
   def params_question
     #segurança permite que as informações abaixo sejam recebidas pelo controller
     params.require(:question).permit(:description, :subject_id, 
