@@ -77,6 +77,14 @@ DEFAULT_FILES_PATH = File.join(Rails.root, 'lib', 'tmp')
       )
   end
 
+  # .find_each mesma coisa que .all.each
+  desc "Reseta contador assuntos"
+  task reset_subjects_counter: :environment do
+    Subject.find_each do |subject|
+      Subject.reset_counters(subject.id, :questions)
+    end
+  end
+
   private
   
   def show_spinner(msg_start, msg_end = "Concluido com sucesso!!")
