@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   namespace :users_backoffice do
     get 'welcome/index'
+    get 'profile', to: 'profile#edit'
   end
 
   namespace :admins_backoffice do
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
     resources :questions
   end
   
-  #skip exclui rota para regitrar novos admins 
+  #skip exclui rota para registrar novos admins 
   devise_for :admins, skip: [:registrations]
   devise_for :users
   
